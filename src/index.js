@@ -1,8 +1,8 @@
 import "./style.css";
 
-const images = document.querySelectorAll("img");
 const backButton = document.querySelector(".back");
 const nextButton = document.querySelector(".next");
+const circles = document.querySelectorAll(".circle");
 
 backButton.addEventListener("click", () => {
   setSlide(slide - 1);
@@ -14,6 +14,18 @@ nextButton.addEventListener("click", () => {
   resetTimer();
 });
 
+circles.forEach((circle) => {
+  circle.addEventListener("click", () => {
+    setSlide(circle.dataset.index);
+    resetTimer();
+
+    circles.forEach((c) => {
+      c.classList.remove("active");
+    });
+    circle.classList.toggle("active");
+  });
+});
+
 const slides = document.querySelector(".slides");
 
 let slide = 0;
@@ -22,7 +34,7 @@ let interval;
 const setupTimer = () => {
   interval = setInterval(function () {
     setSlide(slide + 1);
-  }, 2000);
+  }, 5000);
 };
 
 function setSlide(index) {

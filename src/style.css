@@ -32,6 +32,7 @@ body {
 
 img {
   max-width: 800px;
+  object-fit: cover;
 }
 
 .circles {
