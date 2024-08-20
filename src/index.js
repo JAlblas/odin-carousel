@@ -6,35 +6,39 @@ const nextButton = document.querySelector(".next");
 
 backButton.addEventListener("click", () => {
   setSlide(slide - 1);
+  resetTimer();
 });
 
 nextButton.addEventListener("click", () => {
   setSlide(slide + 1);
-});
-
-images.forEach((image) => {
-  const index = parseInt(image.dataset.index);
-  let currentLeft = parseInt(image.style.left) || 0;
-  image.style.left = currentLeft + index * 100 + "px";
+  resetTimer();
 });
 
 const slides = document.querySelector(".slides");
 
 let slide = 0;
+let interval;
 
-setInterval(function () {
-  setSlide(slide + 1);
-}, 2000);
+const setupTimer = () => {
+  interval = setInterval(function () {
+    setSlide(slide + 1);
+  }, 2000);
+};
 
 function setSlide(index) {
-  slide = index;
-
-  console.log(slide);
-
   if (index > 4) {
     slide = 0;
     slides.style.left = "0px";
+  } else {
+    slide = index;
   }
 
-  slides.style.left = 0 - index * 800 + "px";
+  slides.style.left = 0 - slide * 800 + "px";
 }
+
+const resetTimer = () => {
+  clearInterval(interval);
+  setupTimer();
+};
+
+setupTimer();
