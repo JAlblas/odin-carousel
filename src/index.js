@@ -23,16 +23,18 @@ const slides = document.querySelector(".slides");
 let slide = 0;
 
 setInterval(function () {
-  setSlide(slide);
+  setSlide(slide + 1);
 }, 2000);
 
 function setSlide(index) {
-  slides.style.left = 0 - index * 500 + "px";
+  slide = index;
+
+  console.log(slide);
 
   if (index > 4) {
     slide = 0;
     slides.style.left = "0px";
-  } else {
-    slide++;
   }
+
+  slides.style.left = 0 - index * 800 + "px";
 }
