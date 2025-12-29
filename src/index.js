@@ -45,7 +45,7 @@ function setSlide(index) {
     slide = index;
   }
 
-  slides.style.left = 0 - slide * 800 + "px";
+  slides.style.left = 0 - slide * 1200 + "px";
 }
 
 const resetTimer = () => {

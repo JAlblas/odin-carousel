@@ -1,3 +1,7 @@
+:root {
+  --img-width: 1200px;
+}
+
 html,
 body {
   margin: 0;
@@ -10,29 +14,40 @@ body {
 }
 
 .carousel {
-  box-sizing: border-box;
   overflow: hidden;
-  background-color: orange;
-  width: 800px;
-  box-model: border-box;
+  background-color: #fff;
+  width: var(--img-width);
+  height: 830px;
+  box-sizing: border-box;
 }
 
 .back,
 .next {
   max-height: 50px;
+  margin: 0px 10px;
+  padding: 0px 15px;
+  height: 25px;
+  overflow: visible;
+  background: darkblue;
+  /* inherit font & color from ancestor */
+  color: #fff;
+  font: inherit;
+  border: 1px solid #000;
+  border-radius: 5px;
 }
 
 .slides {
-  width: 4000px;
+  width: calc(var(--img-width) * 5);
   display: flex;
-  flex-direction: reverse-row;
+  flex-direction: row-reverse;
   position: relative;
   left: 0;
 }
 
 img {
-  max-width: 800px;
-  object-fit: cover;
+  min-width: var(--img-width);
+  max-width: 100%;
+  max-height: 800px;
 }
 
 .circles {
@@ -51,5 +66,5 @@ img {
 }
 
 .circle.active {
-  background-color: #000;
+  background-color: darkblue;
 }
