@@ -2,30 +2,7 @@ import "./style.css";
 
 const backButton = document.querySelector(".back");
 const nextButton = document.querySelector(".next");
-const circles = document.querySelectorAll(".circle");
-
-backButton.addEventListener("click", () => {
-  setSlide(slide - 1);
-  resetTimer();
-});
-
-nextButton.addEventListener("click", () => {
-  setSlide(slide + 1);
-  resetTimer();
-});
-
-circles.forEach((circle) => {
-  circle.addEventListener("click", () => {
-    setSlide(circle.dataset.index);
-    resetTimer();
-
-    circles.forEach((c) => {
-      c.classList.remove("active");
-    });
-    circle.classList.toggle("active");
-  });
-});
-
+const circles = document.querySelector(".circles");
 const slides = document.querySelector(".slides");
 
 let slide = 0;
@@ -41,6 +18,8 @@ function setSlide(index) {
   if (index > 4) {
     slide = 0;
     slides.style.left = "0px";
+  } else if (index < 0) {
+    slide = 4;
   } else {
     slide = index;
   }
@@ -54,3 +33,26 @@ const resetTimer = () => {
 };
 
 setupTimer();
+
+backButton.addEventListener("click", () => {
+  setSlide(slide - 1);
+  resetTimer();
+});
+
+nextButton.addEventListener("click", () => {
+  setSlide(slide + 1);
+  resetTimer();
+});
+
+circles.addEventListener("click", (e) => {
+  if (e.target.classList.contains("circle")) {
+    const circle = e.target;
+    setSlide(circle.dataset.index);
+    resetTimer();
+
+    document.querySelectorAll(".circle").forEach((c) => {
+      c.classList.remove("active");
+    });
+    circle.classList.toggle("active");
+  }
+});
