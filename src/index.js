@@ -35,13 +35,17 @@ const resetTimer = () => {
 setupTimer();
 
 backButton.addEventListener("click", () => {
-  setSlide(slide - 1);
+  let newIndex = slide - 1;
+  setSlide(newIndex);
   resetTimer();
+  updateCircleUI(slide);
 });
 
 nextButton.addEventListener("click", () => {
-  setSlide(slide + 1);
+  let newIndex = slide + 1;
+  setSlide(newIndex);
   resetTimer();
+  updateCircleUI(slide);
 });
 
 circles.addEventListener("click", (e) => {
@@ -49,10 +53,14 @@ circles.addEventListener("click", (e) => {
     const circle = e.target;
     setSlide(circle.dataset.index);
     resetTimer();
-
-    document.querySelectorAll(".circle").forEach((c) => {
-      c.classList.remove("active");
-    });
-    circle.classList.toggle("active");
+    updateCircleUI(circle.dataset.index);
   }
 });
+
+const updateCircleUI = (index) => {
+  document.querySelectorAll(".circle").forEach((c) => {
+    c.classList.remove("active");
+  });
+  const circle = document.querySelector(`div[data-index="${index}"]`);
+  circle.classList.toggle("active");
+};
